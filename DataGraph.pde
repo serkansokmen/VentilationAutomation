@@ -1,7 +1,9 @@
+import java.util.Date;
+
 class DataGraph
 {
     float[] vals;
-    ArrayList logVals = new ArrayList();
+    ArrayList<ValueOnTime> logVals = new ArrayList<ValueOnTime>();
     Rectangle drawRect;
     int currentDrawPos;
 
@@ -21,7 +23,7 @@ class DataGraph
         }
         this.vals[this.drawRect.width - 1] = val;
 
-        logVals.add(val);
+        logVals.add(new ValueOnTime(val));
     }
 
     void draw(){
@@ -44,9 +46,24 @@ class DataGraph
         String[] vals = new String[this.logVals.size()];
 
         for (int i = 0; i < this.logVals.size(); i++) {
-            vals[i] = this.logVals.get(i) + "\t";
+            vals[i] = this.logVals.get(i).getLogString() + "\t";
         }
 
         saveStrings("data/logs/" + name + ".txt", vals);
+    }
+};
+
+class ValueOnTime
+{
+    float val;
+    Date date;
+
+    public ValueOnTime (float val) {
+        this.val = val;
+        this.date = new Date();
+    }
+
+    String getLogString(){
+        return String.valueOf(this.val) + "\t" + date.toString();
     }
 };
