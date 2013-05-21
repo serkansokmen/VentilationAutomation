@@ -14,5 +14,5 @@
 # ignore build folder
 build-tmp
 
-# ignore log file
-data/log.txt
+# ignore logs folder
+data/logs

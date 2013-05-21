@@ -1,3 +1,5 @@
+DisposeHandler dh;
+
 // Main data arraylists
 DataGraph graphCO = new DataGraph(new Rectangle(27, 116, 390, 150));
 DataGraph graphCH = new DataGraph(new Rectangle(474, 116, 390, 150));
@@ -15,6 +17,7 @@ void setup(){
     size(1125, 617);
 
     bg = loadImage("Grafik.jpg");
+    dh = new DisposeHandler(this);
 }
 
 void draw(){
@@ -39,4 +42,14 @@ void draw(){
     graphAIR.draw();
 }
 
+public class DisposeHandler{
+    DisposeHandler(PApplet pa){
+        pa.registerDispose(this);
+    }
 
+    public void dispose(){
+        graphCO.log("CO");
+        graphCH.log("CH");
+        graphAIR.log("AIR");
+    }
+}

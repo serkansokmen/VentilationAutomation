@@ -1,6 +1,7 @@
 class DataGraph
 {
     float[] vals;
+    ArrayList logVals = new ArrayList();
     Rectangle drawRect;
     int currentDrawPos;
 
@@ -18,8 +19,9 @@ class DataGraph
         for (int i = 1; i < this.drawRect.width; i++){
             this.vals[i - 1] = this.vals[i];
         }
-
         this.vals[this.drawRect.width - 1] = val;
+
+        logVals.add(val);
     }
 
     void draw(){
@@ -35,5 +37,16 @@ class DataGraph
             point(i, - this.vals[i]);
         }
         popMatrix();
+    }
+
+    void log(String name){
+        // log to text file
+        String[] vals = new String[this.logVals.size()];
+
+        for (int i = 0; i < this.logVals.size(); i++) {
+            vals[i] = this.logVals.get(i) + "\t";
+        }
+
+        saveStrings("data/logs/" + name + ".txt", vals);
     }
 };
